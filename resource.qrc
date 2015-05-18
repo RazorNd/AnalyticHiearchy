@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/text">
+        <file>text/help.html</file>
+        <file>text/about.html</file>
+    </qresource>
+    <qresource prefix="/img">
+        <file>images/AnalyticHiearchyIcons.png</file>
+        <file>images/AnalyticHiearchy.jpg</file>
+        <file>images/AnalyticHiearchyIcons.ico</file>
+    </qresource>
+</RCC>
