@@ -1,7 +1,7 @@
 #ifndef ANALYTICHIEARCHYMAINWINDOW_H
 #define ANALYTICHIEARCHYMAINWINDOW_H
 
-#include "analytichiearchymodel.h"
+#include "model/analytichiearchymodel.h"
 #include <QMainWindow>
 #include <QMessageBox>
 

@@ -1,7 +1,7 @@
 #ifndef PARAMFORM_H
 #define PARAMFORM_H
 
-#include "analytichiearchymodel.h"
+#include "model/analytichiearchymodel.h"
 #include <QWidget>
 
 namespace Ui {

@@ -1,8 +1,8 @@
 #ifndef PRIORITIZATIONMATRIXVIEW_H
 #define PRIORITIZATIONMATRIXVIEW_H
 
-#include "abstractprioritizationmatrix.h"
-#include "ratingeditdelegate.h"
+#include "../model/abstractprioritizationmatrix.h"
+#include "../ratingeditdelegate.h"
 #include "analytichiearchyview.h"
 #include <QWidget>
 #include <QTableView>

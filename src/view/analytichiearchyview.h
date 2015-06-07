@@ -1,10 +1,10 @@
 #ifndef ANALYTICHIEARCHYVIEW_H
 #define ANALYTICHIEARCHYVIEW_H
 
-#include "analytichiearchymodel.h"
+#include "../model/analytichiearchymodel.h"
 #include "prioritizationmatrixview.h"
 #include "resultview.h"
-#include "paramform.h"
+#include "../paramform.h"
 #include <QTabWidget>
 #include <QTableView>
 #include <QVector>

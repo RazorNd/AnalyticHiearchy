@@ -1,7 +1,7 @@
 #ifndef RESULTVIEW_H
 #define RESULTVIEW_H
 
-#include "resultmatrix.h"
+#include "../model/resultmatrix.h"
 #include <QWidget>
 
 namespace Ui {

@@ -1,6 +1,6 @@
 #include "prioritizationmatrixview.h"
 #include "ui_prioritizationmatrixview.h"
-#include "alternativesmatrix.h"
+#include "../model/alternativesmatrix.h"
 #include <QHBoxLayout>
 
 

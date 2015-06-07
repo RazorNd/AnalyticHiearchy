@@ -1,4 +1,4 @@
-#include "abstractprioritizationmatrix.h"
+#include "model/abstractprioritizationmatrix.h"
 #include "ratingeditdelegate.h"
 #include <QDebug>
 

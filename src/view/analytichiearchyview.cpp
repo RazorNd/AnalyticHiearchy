@@ -1,7 +1,7 @@
 #include "analytichiearchyview.h"
-#include "criteriamatrix.h"
-#include "alternativesmatrix.h"
-#include "resultmatrix.h"
+#include "../model/criteriamatrix.h"
+#include "../model/alternativesmatrix.h"
+#include "../model/resultmatrix.h"
 #include <QListWidget>
 #include <QStringListModel>
 

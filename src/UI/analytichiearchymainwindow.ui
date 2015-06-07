@@ -14,7 +14,7 @@
    <string>Метод Анализа Иерархий</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resource.qrc">
+   <iconset resource="../../res/resource.qrc">
     <normaloff>:/img/images/AnalyticHiearchyIcons.png</normaloff>:/img/images/AnalyticHiearchyIcons.png</iconset>
   </property>
   <widget class="AnalyticHiearchyView" name="view"/>
@@ -70,12 +70,12 @@
   <customwidget>
    <class>AnalyticHiearchyView</class>
    <extends>QWidget</extends>
-   <header>analytichiearchyview.h</header>
+   <header>src/view/analytichiearchyview.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="resource.qrc"/>
+  <include location="../../res/resource.qrc"/>
  </resources>
  <connections>
   <connection>
