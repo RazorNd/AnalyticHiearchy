@@ -2,7 +2,7 @@
 #define ABSTRACTPRIORITIZATIONMATRIX_H
 
 #include "skewsymmetricmatrix.h"
-#include "rating.h"
+#include "src/rating.h"
 #include "analytichiearchymodel.h"
 #include <QVector>
 

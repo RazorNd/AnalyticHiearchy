@@ -1,6 +1,6 @@
-#include "resultmatrix.h"
-#include "alternativesmatrix.h"
-#include "criteriamatrix.h"
+#include "src/model/resultmatrix.h"
+#include "src/model/alternativesmatrix.h"
+#include "src/model/criteriamatrix.h"
 #include <QColor>
 
 bool ResultMatrix::isRatingCell(const QModelIndex &index) const
@@ -114,8 +114,12 @@ void ResultMatrix::calculateBestGlobalPriority()
     double max = 0.0;
     for(int i = 0; i < maxAlternatives; i++)
     {
-        if(globalPriority(i) > max)
+        double priority = globalPriority(i);
+        if(priority > max)
+        {
             _bestGlobalPriority = i;
+            max = priority;
+        }
     }
     emit bestAlternativeChanged(_parent->alternative(_bestGlobalPriority));
 }

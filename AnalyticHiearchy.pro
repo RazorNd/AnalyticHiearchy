@@ -8,52 +8,53 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-VERSION = 0.9
+VERSION = 0.9.0.1
 QMAKE_TARGET_COMPANY = RazorNd ltd.
 QMAKE_TARGET_PRODUCT = Analytic Hiearchy
 
 TARGET = AnalyticHiearchy
 TEMPLATE = app
 
+HEADERS += \
+    src/model/abstractprioritizationmatrix.h \
+    src/model/alternativesmatrix.h \
+    src/model/analytichiearchymodel.h \
+    src/model/criteriamatrix.h \
+    src/model/resultmatrix.h \
+    src/model/skewsymmetricmatrix.h \
+    src/view/analytichiearchyview.h \
+    src/view/prioritizationmatrixview.h \
+    src/view/resultview.h \
+    src/analytichiearchymainwindow.h \
+    src/paramform.h \
+    src/rating.h \
+    src/ratingeditdelegate.h
 
-SOURCES += main.cpp \
-    skewsymmetricmatrix.cpp \
-    rating.cpp \
-    abstractprioritizationmatrix.cpp \
-    criteriamatrix.cpp \
-    analytichiearchymodel.cpp \
-    ratingeditdelegate.cpp \    
-    alternativesmatrix.cpp \
-    analytichiearchyview.cpp \
-    prioritizationmatrixview.cpp \
-    paramform.cpp \
-    resultmatrix.cpp \
-    resultview.cpp \
-    analytichiearchymainwindow.cpp
+SOURCES += \
+    src/model/abstractprioritizationmatrix.cpp \
+    src/model/alternativesmatrix.cpp \
+    src/model/analytichiearchymodel.cpp \
+    src/model/criteriamatrix.cpp \
+    src/model/resultmatrix.cpp \
+    src/model/skewsymmetricmatrix.cpp \
+    src/view/analytichiearchyview.cpp \
+    src/view/prioritizationmatrixview.cpp \
+    src/view/resultview.cpp \
+    src/analytichiearchymainwindow.cpp \
+    src/main.cpp \
+    src/paramform.cpp \
+    src/rating.cpp \
+    src/ratingeditdelegate.cpp
 
-
-HEADERS  += \
-    analytichiearchymodel.h \
-    skewsymmetricmatrix.h \
-    rating.h \
-    abstractprioritizationmatrix.h \
-    ratingeditdelegate.h \    
-    criteriamatrix.h \
-    alternativesmatrix.h \
-    analytichiearchyview.h \
-    prioritizationmatrixview.h \
-    paramform.h \
-    resultmatrix.h \
-    resultview.h \
-    analytichiearchymainwindow.h
-
-FORMS += \
-    paramform.ui \
-    prioritizationmatrixview.ui \
-    resultview.ui \
-    analytichiearchymainwindow.ui
+RC_ICONS = res/images/AnalyticHiearchyIcons.ico
 
 RESOURCES += \
-    resource.qrc
+    res/resource.qrc
 
-RC_ICONS = images/AnalyticHiearchyIcons.ico
+FORMS += \
+    src/UI/analytichiearchymainwindow.ui \
+    src/UI/paramform.ui \
+    src/UI/prioritizationmatrixview.ui \
+    src/UI/resultview.ui
+
+
