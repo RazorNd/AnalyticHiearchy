@@ -43,6 +43,7 @@ public:
 
     static double randomConsistency(int size);
     const RatingScale *scale() const;
+    int maxRating() const;
     QString alternative(int num) const;
     QString criterion(int num) const;
 
@@ -64,6 +65,7 @@ private slots:
 public slots:    
     void setCriteriaCount(int criteriaCount);
     void setAlternativeCount(int alternativeCount);
+    void setMaxRating(int maxRating);
 
 signals:
     void criteriaMatrixChanged(CriteriaMatrix *matrix);
@@ -71,7 +73,8 @@ signals:
     void criteriaCountChanged(int value);
     void alternativeCountChanged(int value);    
     void alternativeNameChanged(int numberCriteria, QString name);
-    void dataChanged();    
+    void dataChanged();
+    void maxRatingChanged(int maxRating);
 };
 
 #endif // ANALYTICHIEARCHYMODEL_H

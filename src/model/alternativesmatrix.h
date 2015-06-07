@@ -17,7 +17,7 @@ signals:
     void criteriaNameChanged(QString name);
 
 public slots:
-    void setCriteriaName(QString name);
+    void setCriteriaName(QString name);    
 
     // AbstractPrioritizationMatrix interface
 protected:

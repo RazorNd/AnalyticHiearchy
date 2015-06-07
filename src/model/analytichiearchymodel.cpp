@@ -10,6 +10,11 @@ const RatingScale *AnalyticHiearchyModel::scale() const
     return &_scale;
 }
 
+int AnalyticHiearchyModel::maxRating() const
+{
+    return _scale.maxRating();
+}
+
 QString AnalyticHiearchyModel::alternative(int num) const
 {
     return _alternatives.data(_alternatives.index(num), Qt::DisplayRole).toString();
@@ -43,6 +48,12 @@ void AnalyticHiearchyModel::setAlternativeCount(int alternativeCount)
     _alternativeCount = alternativeCount;    
     emit alternativeCountChanged(_alternativeCount);
     updateAlternatives();
+}
+
+void AnalyticHiearchyModel::setMaxRating(int maxRating)
+{
+    _scale.setMaxRating(static_cast<unsigned int>(maxRating));
+    emit maxRatingChanged(maxRating);
 }
 
 void AnalyticHiearchyModel::appendCriterias(int count)

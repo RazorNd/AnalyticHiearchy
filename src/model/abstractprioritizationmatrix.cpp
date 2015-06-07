@@ -230,6 +230,7 @@ AbstractPrioritizationMatrix::AbstractPrioritizationMatrix(AnalyticHiearchyModel
     _harmonizationCorrect(false)
 {
     connect(this, SIGNAL(dataChanged(QModelIndex,QModelIndex)), parentModel, SIGNAL(dataChanged()));
+    connect(parentModel, SIGNAL(maxRatingChanged(int)), SLOT(clear()));
 }
 
 double AbstractPrioritizationMatrix::harmonization() const
@@ -316,7 +317,6 @@ QVariant AbstractPrioritizationMatrix::normalPriorityHeaderData(int role) const
     }
     return QVariant();
 }
-
 
 bool AbstractPrioritizationMatrix::setData(const QModelIndex &index, const QVariant &value, int role)
 {

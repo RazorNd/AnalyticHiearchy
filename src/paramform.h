@@ -17,11 +17,6 @@ public:
     ~ParamForm();
 
     void setModel(AnalyticHiearchyModel *model);
-
-signals:
-    void criteriaCountChanged(int count);
-    void alternativesCountChanged(int count);    
-
 private:
     Ui::ParamForm *ui;
 };

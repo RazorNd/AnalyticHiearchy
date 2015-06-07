@@ -74,10 +74,7 @@ void AnalyticHiearchyView::update()
 void AnalyticHiearchyView::setConnectParam()
 {
     param->setModel(_model);
-    connect(param, SIGNAL(criteriaCountChanged(int)),
-            _model, SLOT(setCriteriaCount(int)));
-    connect(param, SIGNAL(alternativesCountChanged(int)),
-            _model, SLOT(setAlternativeCount(int)));    
+
     connect(_model, SIGNAL(criteriaCountChanged(int)), SLOT(onCriteriaCountChanged(int)));
     connect(_model, SIGNAL(alternativeMatrixChanged(int,AlternativesMatrix*)),
             SLOT(onAlternativeChanged(int,AlternativesMatrix*)));
