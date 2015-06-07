@@ -1,7 +1,7 @@
-#include "analytichiearchymodel.h"
-#include "criteriamatrix.h"
-#include "alternativesmatrix.h"
-#include "resultmatrix.h"
+#include "src/model/analytichiearchymodel.h"
+#include "src/model/criteriamatrix.h"
+#include "src/model/alternativesmatrix.h"
+#include "src/model/resultmatrix.h"
 
 double AnalyticHiearchyModel::_randomConsistency[11] = {0, 0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49};
 

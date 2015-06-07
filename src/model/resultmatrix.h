@@ -1,7 +1,7 @@
 #ifndef RESULTMATRIX_H
 #define RESULTMATRIX_H
 
-#include "analytichiearchymodel.h"
+#include "src/model/analytichiearchymodel.h"
 #include <QAbstractTableModel>
 #include <QObject>
 #include <QVector>

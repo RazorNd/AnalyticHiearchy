@@ -1,7 +1,7 @@
 #ifndef ANALYTICHIEARCHYMODEL_H
 #define ANALYTICHIEARCHYMODEL_H
 
-#include "rating.h"
+#include "src/rating.h"
 #include <QStringList>
 #include <QStringListModel>
 #include <QVector>
