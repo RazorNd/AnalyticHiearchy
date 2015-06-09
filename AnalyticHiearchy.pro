@@ -28,7 +28,8 @@ HEADERS += \
     src/analytichiearchymainwindow.h \
     src/paramform.h \
     src/rating.h \
-    src/ratingeditdelegate.h
+    src/ratingeditdelegate.h \
+    src/model/entringdatamodel.h
 
 SOURCES += \
     src/model/abstractprioritizationmatrix.cpp \
@@ -44,7 +45,8 @@ SOURCES += \
     src/main.cpp \
     src/paramform.cpp \
     src/rating.cpp \
-    src/ratingeditdelegate.cpp
+    src/ratingeditdelegate.cpp \
+    src/model/entringdatamodel.cpp
 
 RC_ICONS = res/images/AnalyticHiearchyIcons.ico
 

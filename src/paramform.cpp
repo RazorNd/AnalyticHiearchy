@@ -1,5 +1,6 @@
 #include "paramform.h"
 #include "ui_paramform.h"
+#include "model/entringdatamodel.h"
 
 ParamForm::ParamForm(QWidget *parent) :
     QWidget(parent),
@@ -15,8 +16,7 @@ ParamForm::~ParamForm()
 
 void ParamForm::setModel(AnalyticHiearchyModel *model)
 {
-    ui->criteriaView->setModel(model->criteriaModel());
-    ui->alternativesView->setModel(model->alternativesModel());
+    ui->tableView->setModel(model->entringModel());
 
     ui->maxRating->setValue(model->maxRating());
 
