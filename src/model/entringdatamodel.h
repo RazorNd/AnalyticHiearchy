@@ -25,16 +25,17 @@ class EntringDataModel : public QAbstractTableModel
     bool setAlternativesRating(int criteria, int alternative, const QVariant &value);
 
     void enterCriteria();
+    void enterAlternatives();
+    void enterAlternative(int criteria);
 public:
-    EntringDataModel(AnalyticHiearchyModel *parentModel);
-    ~EntringDataModel();
+    EntringDataModel(AnalyticHiearchyModel *parentModel);    
 
     void setCriteriaCount(int count);
     void setAlternativesCount(int count);
 
 public slots:
     void clear();
-    virtual bool enterModel();
+    void enterModel();
 
     // QAbstractItemModel interface
 public:

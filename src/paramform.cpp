@@ -18,6 +18,7 @@ void ParamForm::setModel(AnalyticHiearchyModel *model)
 {
     ui->tableView->setModel(model->entringModel());
 
+
     ui->maxRating->setValue(model->maxRating());
 
     connect(ui->criteriaCount, SIGNAL(valueChanged(int)),
@@ -26,6 +27,10 @@ void ParamForm::setModel(AnalyticHiearchyModel *model)
             model, SLOT(setAlternativeCount(int)));
     connect(ui->maxRating, SIGNAL(valueChanged(int)),
             model, SLOT(setMaxRating(int)));
+    connect(ui->submitButton, SIGNAL(clicked()),
+            model->entringModel(), SLOT(enterModel()));
+    connect(ui->clearButton, SIGNAL(clicked()),
+            model->entringModel(), SLOT(clear()));
 
     ui->criteriaCount->setValue(2);
     ui->alternativesCount->setValue(3);

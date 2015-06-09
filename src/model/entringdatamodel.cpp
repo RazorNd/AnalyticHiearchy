@@ -1,5 +1,6 @@
 #include "entringdatamodel.h"
 #include "criteriamatrix.h"
+#include "alternativesmatrix.h"
 #include <QDebug>
 #include <QVariant>
 #include <QtAlgorithms>
@@ -69,11 +70,7 @@ void EntringDataModel::enterCriteria()
             {
                 double delta =
                         (double)(_criteriaRating[i] - _criteriaRating[j])*_parent->maxRating() / max;
-
-                qDebug() << delta << qRound(delta);
-
                 int res = qRound(qAbs(delta) - 1);
-
                 matrix->setData(matrix->index(i, j), delta > 0 ? res : -res, Qt::EditRole);
             }
             else
@@ -85,14 +82,54 @@ void EntringDataModel::enterCriteria()
     }
 }
 
+void EntringDataModel::enterAlternatives()
+{
+    int size = _parent->alternativeCount();
+    QVector<double> nullVector(size, 0.0);
+    for(int i = 0; i < _alternativeRating.size(); i++)
+    {
+        if(!qEqual(_alternativeRating[i].begin(),
+                   _alternativeRating[i].end(),
+                   nullVector.begin()))
+        {
+            enterAlternative(i);
+        }
+    }
+}
+
+void EntringDataModel::enterAlternative(int criteria)
+{
+    QVector<double> &alternative = _alternativeRating[criteria];
+    int size = _parent->alternativeCount();
+    AlternativesMatrix *matrix = _parent->alternativesMatrix(criteria);
+    double max, min;
+    max = min = alternative[0];
+    foreach (double val, alternative)
+    {
+        if(val > max)
+            max = val;
+        if(val < min)
+            min = val;
+    }
+    for(int i = 0; i < size; i++)
+    {
+        for(int j = i + 1; j < size; j++)
+        {
+            double delta =
+                    (alternative[i] - alternative[j])
+                    * (_parent->maxRating() - 1)
+                    / (max - min);
+            int res = qRound(delta);
+            matrix->setData(matrix->index(i, j),
+                            _criteriaDirectionOnMax.at(criteria) ? res : -res,
+                            Qt::EditRole);
+        }
+    }
+}
+
 EntringDataModel::EntringDataModel(AnalyticHiearchyModel *parentModel):
     QAbstractTableModel(parentModel), _parent(parentModel)
 {
-}
-
-EntringDataModel::~EntringDataModel()
-{
-
 }
 
 void EntringDataModel::setCriteriaCount(int count)
@@ -171,6 +208,10 @@ QVariant EntringDataModel::data(const QModelIndex &index, int role) const
 {
     switch (role) {
     case Qt::DisplayRole:
+        if(getTypeCell(index) == EntringDataModel::CriteriaDirection)
+        {
+            return _criteriaDirectionOnMax.at(index.column()) ? "max" : "min";
+        }
     case Qt::EditRole:
         switch(getTypeCell(index)){
         case EntringDataModel::AlternativeRating:
@@ -251,7 +292,8 @@ Qt::ItemFlags EntringDataModel::flags(const QModelIndex &/*index*/) const
 }
 
 
-bool EntringDataModel::enterModel()
+void EntringDataModel::enterModel()
 {
-    this->enterCriteria();
+    enterCriteria();
+    enterAlternatives();
 }
