@@ -26,4 +26,7 @@ void ParamForm::setModel(AnalyticHiearchyModel *model)
             model, SLOT(setAlternativeCount(int)));
     connect(ui->maxRating, SIGNAL(valueChanged(int)),
             model, SLOT(setMaxRating(int)));
+
+    ui->criteriaCount->setValue(2);
+    ui->alternativesCount->setValue(3);
 }

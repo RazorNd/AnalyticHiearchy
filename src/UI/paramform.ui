@@ -76,7 +76,14 @@
    <item>
     <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,0,1,0">
      <item row="0" column="1">
-      <widget class="QSpinBox" name="criteriaCount"/>
+      <widget class="QSpinBox" name="criteriaCount">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>10</number>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0" colspan="2">
       <widget class="QListView" name="criteriaView">
@@ -125,7 +132,11 @@
       </widget>
      </item>
      <item row="0" column="4">
-      <widget class="QSpinBox" name="alternativesCount"/>
+      <widget class="QSpinBox" name="alternativesCount">
+       <property name="minimum">
+        <number>2</number>
+       </property>
+      </widget>
      </item>
      <item row="1" column="3" colspan="2">
       <widget class="QListView" name="alternativesView"/>
