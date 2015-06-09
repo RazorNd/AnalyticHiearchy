@@ -17,9 +17,9 @@ void AnalyticHiearchyView::setModel(AnalyticHiearchyModel *model)
     ResultMatrix *resultMatrix = model->resultMatrix();
 
     _resultView->setModel(resultMatrix);
-    connect(_resultView, SIGNAL(updateData()), resultMatrix, SLOT(updateDate()));
-    setConnectParam();
+    connect(_resultView, SIGNAL(updateData()), resultMatrix, SLOT(updateDate()));    
     update();
+    setConnectParam();
 }
 
 void AnalyticHiearchyView::onCriteriaChanged(CriteriaMatrix *matrix)
@@ -73,11 +73,10 @@ void AnalyticHiearchyView::update()
 
 void AnalyticHiearchyView::setConnectParam()
 {
-    param->setModel(_model);
-
     connect(_model, SIGNAL(criteriaCountChanged(int)), SLOT(onCriteriaCountChanged(int)));
     connect(_model, SIGNAL(alternativeMatrixChanged(int,AlternativesMatrix*)),
             SLOT(onAlternativeChanged(int,AlternativesMatrix*)));
+    param->setModel(_model);
 }
 
 AnalyticHiearchyView::AnalyticHiearchyView(QWidget *parent):
