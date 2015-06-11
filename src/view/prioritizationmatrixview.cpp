@@ -42,8 +42,10 @@ void PrioritizationMatrixView::setModel(AbstractPrioritizationMatrix *matrix)
     ui->view->setModel(matrix);    
     setName(matrix->getName());
     delegate->setScale(matrix->scale());
-    connect(matrix, SIGNAL(harmonizationChanged(double)),
-            ui->harmonizationView, SLOT(setNum(double)));
+    connect(matrix, SIGNAL(harmonizationChanged(QString)),
+            ui->harmonizationView, SLOT(setText(QString)));
+    connect(matrix, SIGNAL(harmonizationColorChanged(QString)),
+            ui->harmonizationView, SLOT(setStyleSheet(QString)));
     connect(ui->clearButton, SIGNAL(clicked()),
             matrix, SLOT(clear()));
     AlternativesMatrix *alternative = qobject_cast<AlternativesMatrix *>(matrix);

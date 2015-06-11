@@ -37,6 +37,8 @@ class AbstractPrioritizationMatrix : public SkewSymmetricMatrix
     int normalVectorPriorityColumn() const;
     void recalculateHarmonization();
 
+    void emitHarmonization();
+
 public:
     bool isRatingCell(const QModelIndex &index) const;
     bool isSumCell(const QModelIndex &index) const;
@@ -66,7 +68,9 @@ public:
 
     virtual QString getName() const = 0;
 signals:
+    void harmonizationChanged(QString value);
     void harmonizationChanged(double value);
+    void harmonizationColorChanged(QString styleSheet);
     void harmonizationCorcted(bool value);
     void NormalVectorPriorityChanged();
 protected:

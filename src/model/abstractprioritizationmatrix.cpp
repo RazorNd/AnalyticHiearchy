@@ -203,8 +203,35 @@ void AbstractPrioritizationMatrix::recalculateHarmonization()
 
     double indexHarmonization = (sum - size) / (size - 1);
     _harmonization = indexHarmonization / _parent->randomConsistency(size);
-    emit harmonizationChanged(_harmonization);
-    setHarmonizationCorrect(true);
+
+    emitHarmonization();
+}
+
+void AbstractPrioritizationMatrix::emitHarmonization()
+{
+    if(_harmonization > 0)
+    {
+        QString color;
+        if(_harmonization < 0.1)
+            color = "green";
+        else if (_harmonization < 0.2)
+            color = "yellow";
+        else
+            color = "red";
+
+        setHarmonizationCorrect(true);
+        emit harmonizationChanged(_harmonization);
+        emit harmonizationChanged(QString("<b>%1%</b>")
+                                  .arg(QString::number(_harmonization * 100, 'f', 2)));
+        emit harmonizationColorChanged(QString("background-color: %1")
+                                       .arg(color));
+    }
+    else
+    {
+        setHarmonizationCorrect(false);
+        emit harmonizationChanged("");
+        emit harmonizationColorChanged(QString("background-color: white"));
+    }
 }
 
 int AbstractPrioritizationMatrix::sumRatingRow() const
@@ -287,6 +314,8 @@ void AbstractPrioritizationMatrix::clear()
     qFill(_sumRating, 0);
     qFill(_vectorPriority, 0);
     _sumVectoPriority = 0;
+    _harmonization = 0.0;
+    emitHarmonization();
     SkewSymmetricMatrix::clear();
     endResetModel();
 }
