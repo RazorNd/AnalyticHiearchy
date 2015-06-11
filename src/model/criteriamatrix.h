@@ -13,6 +13,10 @@ public:
     // AbstractPrioritizationMatrix interface
 protected:
     QVariant ratingHeaderData(int section, int role) const;
+
+    // AbstractPrioritizationMatrix interface
+public:
+    QString getName() const;
 };
 
 #endif // CRITERIAMATRIX_H

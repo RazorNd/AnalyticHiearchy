@@ -39,7 +39,8 @@ PrioritizationMatrixView::~PrioritizationMatrixView()
 
 void PrioritizationMatrixView::setModel(AbstractPrioritizationMatrix *matrix)
 {
-    ui->view->setModel(matrix);
+    ui->view->setModel(matrix);    
+    setName(matrix->getName());
     delegate->setScale(matrix->scale());
     connect(matrix, SIGNAL(harmonizationChanged(double)),
             ui->harmonizationView, SLOT(setNum(double)));
