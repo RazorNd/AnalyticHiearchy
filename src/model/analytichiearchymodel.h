@@ -9,6 +9,7 @@
 class CriteriaMatrix;
 class AlternativesMatrix;
 class ResultMatrix;
+class EntringDataModel;
 
 class AnalyticHiearchyModel : public QObject
 {
@@ -16,7 +17,7 @@ class AnalyticHiearchyModel : public QObject
 
     static double _randomConsistency[11];
 
-    RatingScale _scale;    
+    RatingScale _scale;
     QStringListModel _criteria;
     QStringListModel _alternatives;
     int _criteriaCount;
@@ -25,6 +26,7 @@ class AnalyticHiearchyModel : public QObject
     CriteriaMatrix *_criteriaMatrix;
     QVector<AlternativesMatrix *> _alternativesMatrixs;
     ResultMatrix *_result;
+    EntringDataModel *_entringData;
 
     void createAlternativesMatrixs();
     void updateAlternativesMatrixs();
@@ -54,6 +56,7 @@ public:
     AlternativesMatrix *alternativesMatrix(int numberCriteria) const;    
     QStringListModel *criteriaModel();
     QStringListModel *alternativesModel();
+    EntringDataModel *entringModel();
 
     ResultMatrix *resultMatrix() const;
     void setResult(ResultMatrix *resultMatrix);

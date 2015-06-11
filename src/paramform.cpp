@@ -1,11 +1,14 @@
 #include "paramform.h"
 #include "ui_paramform.h"
+#include "model/entringdatamodel.h"
+#include "criteriadirectiondeligate.h"
 
 ParamForm::ParamForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ParamForm)
 {
     ui->setupUi(this);    
+    ui->tableView->setItemDelegateForRow(0, new CriteriaDirectionDeligate(this));
 }
 
 ParamForm::~ParamForm()
@@ -15,18 +18,9 @@ ParamForm::~ParamForm()
 
 void ParamForm::setModel(AnalyticHiearchyModel *model)
 {
-    ui->criteriaView->setModel(model->criteriaModel());
-    ui->alternativesView->setModel(model->alternativesModel());
-
-    ui->maxRating->setValue(model->maxRating());
-
-    connect(ui->criteriaCount, SIGNAL(valueChanged(int)),
-            model, SLOT(setCriteriaCount(int)));
-    connect(ui->alternativesCount, SIGNAL(valueChanged(int)),
-            model, SLOT(setAlternativeCount(int)));
-    connect(ui->maxRating, SIGNAL(valueChanged(int)),
-            model, SLOT(setMaxRating(int)));
-
-    ui->criteriaCount->setValue(2);
-    ui->alternativesCount->setValue(3);
+    ui->tableView->setModel(model->entringModel());
+    connect(ui->submitButton, SIGNAL(clicked()),
+            model->entringModel(), SLOT(enterModel()));
+    connect(ui->clearButton, SIGNAL(clicked()),
+            model->entringModel(), SLOT(clear()));
 }

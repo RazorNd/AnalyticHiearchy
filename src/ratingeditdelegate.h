@@ -9,7 +9,7 @@ class RatingEditDelegate: public QStyledItemDelegate
 {
     const RatingScale *_scale;
 public:
-    RatingEditDelegate(QObject *parent = 0); //TODO: изменить параметры!!!
+    RatingEditDelegate(QObject *parent = 0);
 
     void setScale(const RatingScale *scale);
     const RatingScale *scale() const;

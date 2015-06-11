@@ -9,7 +9,12 @@ AnalyticHiearchyMainWindow::AnalyticHiearchyMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     model = new AnalyticHiearchyModel(this);
+    model->setCriteriaCount(2);
+    model->setAlternativeCount(3);
     ui->view->setModel(model);
+
+    settings = new SettingsDialog(this);
+    settings->setModel(model);
 
     QFile fileInfo(":/text/text/help.html");
 
@@ -38,4 +43,9 @@ void AnalyticHiearchyMainWindow::help()
 void AnalyticHiearchyMainWindow::about()
 {
     QMessageBox::about(this, "Метод анализа иерархий", aboutText);
+}
+
+void AnalyticHiearchyMainWindow::showSettings()
+{
+    settings->open();
 }

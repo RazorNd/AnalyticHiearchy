@@ -2,6 +2,7 @@
 #include "src/model/criteriamatrix.h"
 #include "src/model/alternativesmatrix.h"
 #include "src/model/resultmatrix.h"
+#include "src/model/entringdatamodel.h"
 
 double AnalyticHiearchyModel::_randomConsistency[11] = {0, 0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49};
 
@@ -33,8 +34,9 @@ int AnalyticHiearchyModel::criteriaCount() const
 
 void AnalyticHiearchyModel::setCriteriaCount(int criteriaCount)
 {
-    _criteriaCount = criteriaCount;
+    _criteriaCount = criteriaCount;    
     emit criteriaCountChanged(_criteriaCount);
+    _entringData->setCriteriaCount(criteriaCount);
     updateCriteria();
 }
 
@@ -45,8 +47,9 @@ int AnalyticHiearchyModel::alternativeCount() const
 
 void AnalyticHiearchyModel::setAlternativeCount(int alternativeCount)
 {
-    _alternativeCount = alternativeCount;    
+    _alternativeCount = alternativeCount;
     emit alternativeCountChanged(_alternativeCount);
+    _entringData->setAlternativesCount(alternativeCount);
     updateAlternatives();
 }
 
@@ -107,6 +110,11 @@ QStringListModel *AnalyticHiearchyModel::criteriaModel()
 QStringListModel *AnalyticHiearchyModel::alternativesModel()
 {
     return &_alternatives;
+}
+
+EntringDataModel *AnalyticHiearchyModel::entringModel()
+{
+    return _entringData;
 }
 
 void AnalyticHiearchyModel::onCriteriaChanged(QModelIndex first, QModelIndex last)
@@ -187,6 +195,7 @@ AnalyticHiearchyModel::AnalyticHiearchyModel(QObject *parent):
 {
     _criteriaMatrix = new CriteriaMatrix(this);
     _result = new ResultMatrix(this);
+    _entringData = new EntringDataModel(this);
     connect(&_criteria, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             SLOT(onCriteriaChanged(QModelIndex,QModelIndex)));
     connect(&_alternatives, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
