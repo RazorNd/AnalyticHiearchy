@@ -31,6 +31,8 @@
     <property name="title">
      <string>&amp;Файл</string>
     </property>
+    <addaction name="settings"/>
+    <addaction name="separator"/>
     <addaction name="exit"/>
    </widget>
    <widget class="QMenu" name="menu_2">
@@ -63,6 +65,11 @@
   <action name="about">
    <property name="text">
     <string>О программе</string>
+   </property>
+  </action>
+  <action name="settings">
+   <property name="text">
+    <string>Настройки</string>
    </property>
   </action>
  </widget>
@@ -126,9 +133,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>settings</sender>
+   <signal>triggered()</signal>
+   <receiver>AnalyticHiearchyMainWindow</receiver>
+   <slot>showSettings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>help()</slot>
   <slot>about()</slot>
+  <slot>showSettings()</slot>
  </slots>
 </ui>
