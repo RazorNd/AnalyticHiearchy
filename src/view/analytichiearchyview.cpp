@@ -88,5 +88,5 @@ AnalyticHiearchyView::AnalyticHiearchyView(QWidget *parent):
     _criteriaView = new PrioritizationMatrixView("Критерии", this);
 
     _resultView = new ResultView(this);
-    addTab(_resultView, "Результат");
+    addTab(_resultView, "Матрица глобальных приоритетов");
 }
