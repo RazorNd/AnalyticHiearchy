@@ -22,6 +22,8 @@ public slots:
     // AbstractPrioritizationMatrix interface
 protected:
     QVariant ratingHeaderData(int section, int role) const;
+    QString getName() const;
+
 };
 
 #endif // ALTERNATIVESMATRIX_H

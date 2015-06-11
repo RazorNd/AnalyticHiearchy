@@ -15,3 +15,9 @@ QVariant CriteriaMatrix::ratingHeaderData(int section, int role) const
     }
     return QVariant();
 }
+
+
+QString CriteriaMatrix::getName() const
+{
+    return "Критерии";
+}
