@@ -134,9 +134,6 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="0" colspan="3">
-      <widget class="QListWidget" name="listWidget"/>
-     </item>
      <item row="0" column="4">
       <widget class="QLabel" name="labelAlternatives">
        <property name="minimumSize">
@@ -193,7 +190,10 @@
       </spacer>
      </item>
      <item row="1" column="4" colspan="3">
-      <widget class="QListView" name="listView"/>
+      <widget class="QListView" name="alternativesName"/>
+     </item>
+     <item row="1" column="0" colspan="3">
+      <widget class="QListView" name="criteriasName"/>
      </item>
     </layout>
    </item>

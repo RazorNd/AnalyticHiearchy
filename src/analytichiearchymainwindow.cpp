@@ -14,6 +14,7 @@ AnalyticHiearchyMainWindow::AnalyticHiearchyMainWindow(QWidget *parent) :
     ui->view->setModel(model);
 
     settings = new SettingsDialog(this);
+    settings->setModel(model);
 
     QFile fileInfo(":/text/text/help.html");
 
