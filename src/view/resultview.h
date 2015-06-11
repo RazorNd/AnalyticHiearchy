@@ -3,6 +3,7 @@
 
 #include "../model/resultmatrix.h"
 #include <QWidget>
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 class ResultView;
@@ -11,15 +12,12 @@ class ResultView;
 class ResultView : public QWidget
 {
     Q_OBJECT
-
+    QSortFilterProxyModel *sortModel;
 public:
     explicit ResultView(QWidget *parent = 0);
     ~ResultView();
 
     void setModel(ResultMatrix *model);
-
-signals:
-    void updateData();
 
 private:
     Ui::ResultView *ui;
