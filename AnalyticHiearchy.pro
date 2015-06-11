@@ -30,7 +30,8 @@ HEADERS += \
     src/rating.h \
     src/ratingeditdelegate.h \
     src/model/entringdatamodel.h \
-    src/settingsdialog.h
+    src/settingsdialog.h \
+    src/criteriadirectiondeligate.h
 
 SOURCES += \
     src/model/abstractprioritizationmatrix.cpp \
@@ -48,7 +49,8 @@ SOURCES += \
     src/rating.cpp \
     src/ratingeditdelegate.cpp \
     src/model/entringdatamodel.cpp \
-    src/settingsdialog.cpp
+    src/settingsdialog.cpp \
+    src/criteriadirectiondeligate.cpp
 
 RC_ICONS = res/images/AnalyticHiearchyIcons.ico
 

@@ -254,7 +254,7 @@ QVariant EntringDataModel::headerData(int section, Qt::Orientation orientation, 
         if(section == 1 && orientation == Qt::Vertical)
             return QString("Важность критерия");
         if(section == 0 && orientation == Qt::Vertical)
-            return QString("На максимум");
+            return QString("Экстремум критерия");
     case Qt::EditRole:
         if(orientation == Qt::Horizontal)
             return _parent->criterion(section);
