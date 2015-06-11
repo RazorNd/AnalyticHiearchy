@@ -15,11 +15,11 @@ void AnalyticHiearchyView::setModel(AnalyticHiearchyModel *model)
 {
     _model = model;
     ResultMatrix *resultMatrix = model->resultMatrix();
-
-    _resultView->setModel(resultMatrix);
-    connect(_resultView, SIGNAL(updateData()), resultMatrix, SLOT(updateDate()));    
     update();
     setConnectParam();
+    _resultView->setModel(resultMatrix);
+    ///NOTE: проверка можно ли без этого обойтись
+    //connect(_resultView, SIGNAL(updateData()), resultMatrix, SLOT(updateDate()));
 }
 
 void AnalyticHiearchyView::onCriteriaChanged(CriteriaMatrix *matrix)
@@ -63,9 +63,9 @@ void AnalyticHiearchyView::onTabNameChanged(int numberTab, QString name)
 
 void AnalyticHiearchyView::update()
 {
-    onCriteriaCountChanged(_model->alternativeCount());
-    onCriteriaChanged(model()->criteriaMatrix());
-    for(int i = 0; i < model()->alternativeCount(); i++)
+    onCriteriaCountChanged(_model->criteriaCount());
+    onCriteriaChanged(model()->criteriaMatrix());    
+    for(int i = 0; i < model()->criteriaCount(); i++)
     {
         onAlternativeChanged(i, model()->alternativesMatrix(i));
     }
