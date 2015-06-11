@@ -63,6 +63,8 @@ public:
     // SkewSymmetricMatrix interface
     void setSize(int size);
     void clear();
+
+    virtual QString getName() const = 0;
 signals:
     void harmonizationChanged(double value);
     void harmonizationCorcted(bool value);

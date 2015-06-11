@@ -26,3 +26,9 @@ QVariant AlternativesMatrix::ratingHeaderData(int section, int role) const
     }
     return QVariant();
 }
+
+
+QString AlternativesMatrix::getName() const
+{
+    return criteriaName();
+}
