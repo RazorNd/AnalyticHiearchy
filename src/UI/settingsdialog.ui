@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Настройки</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="2" column="1">
@@ -214,6 +214,38 @@
     <hint type="destinationlabel">
      <x>468</x>
      <y>499</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>maxRating</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderMaxRating</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>157</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>49</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderMaxRating</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>maxRating</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>262</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>19</y>
     </hint>
    </hints>
   </connection>
