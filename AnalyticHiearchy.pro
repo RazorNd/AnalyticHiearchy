@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-VERSION = 0.9.0.1
+VERSION = 0.9.5.0
 QMAKE_TARGET_COMPANY = RazorNd ltd.
 QMAKE_TARGET_PRODUCT = Analytic Hiearchy
 
