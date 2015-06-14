@@ -20,7 +20,6 @@ class ResultMatrix : public QAbstractTableModel
     double priority(int alternative, int criterion) const;
     QVariant priorityData(const QModelIndex& index, int role) const;
 
-    double globalPriority(int alternative) const;
     QVariant globalPriorityData(const QModelIndex& index, int role) const;
 
     void checkBestPriority(int criterion, int alternative, double value);
@@ -35,6 +34,8 @@ class ResultMatrix : public QAbstractTableModel
     void clear();
 public:
     ResultMatrix(AnalyticHiearchyModel *parentModel);
+
+    double globalPriority(int alternative) const;
 
     // QAbstractItemModel interface
 public:

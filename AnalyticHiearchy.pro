@@ -31,7 +31,8 @@ HEADERS += \
     src/ratingeditdelegate.h \
     src/model/entringdatamodel.h \
     src/settingsdialog.h \
-    src/criteriadirectiondeligate.h
+    src/criteriadirectiondeligate.h \
+    src/view/rankingresult.h
 
 SOURCES += \
     src/model/abstractprioritizationmatrix.cpp \
@@ -50,7 +51,8 @@ SOURCES += \
     src/ratingeditdelegate.cpp \
     src/model/entringdatamodel.cpp \
     src/settingsdialog.cpp \
-    src/criteriadirectiondeligate.cpp
+    src/criteriadirectiondeligate.cpp \
+    src/view/rankingresult.cpp
 
 RC_ICONS = res/images/AnalyticHiearchyIcons.ico
 
@@ -62,6 +64,7 @@ FORMS += \
     src/UI/paramform.ui \
     src/UI/prioritizationmatrixview.ui \
     src/UI/resultview.ui \
-    src/UI/settingsdialog.ui
+    src/UI/settingsdialog.ui \
+    src/UI/rankingresult.ui
 
 
