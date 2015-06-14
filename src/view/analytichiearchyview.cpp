@@ -18,6 +18,7 @@ void AnalyticHiearchyView::setModel(AnalyticHiearchyModel *model)
     update();
     setConnectParam();
     _resultView->setModel(resultMatrix);
+    _rank->setModel(model);
     ///NOTE: проверка можно ли без этого обойтись
     //connect(_resultView, SIGNAL(updateData()), resultMatrix, SLOT(updateDate()));
 }
@@ -89,4 +90,6 @@ AnalyticHiearchyView::AnalyticHiearchyView(QWidget *parent):
 
     _resultView = new ResultView(this);
     addTab(_resultView, "Матрица глобальных приоритетов");
+    _rank = new RankingResult(this);
+    addTab(_rank, "Результат");
 }

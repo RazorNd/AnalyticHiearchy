@@ -4,6 +4,7 @@
 #include "../model/analytichiearchymodel.h"
 #include "prioritizationmatrixview.h"
 #include "resultview.h"
+#include "rankingresult.h"
 #include "../paramform.h"
 #include <QTabWidget>
 #include <QTableView>
@@ -19,7 +20,7 @@ class AnalyticHiearchyView : public QTabWidget
     AnalyticHiearchyModel *_model;
     ParamForm *param;
     ResultView *_resultView;
-
+    RankingResult *_rank;
     void setConnectParam();
 public:
     AnalyticHiearchyView(QWidget *parent = 0);    
