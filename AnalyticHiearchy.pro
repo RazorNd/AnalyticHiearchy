@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,7 +32,8 @@ HEADERS += \
     src/model/entringdatamodel.h \
     src/settingsdialog.h \
     src/criteriadirectiondeligate.h \
-    src/view/rankingresult.h
+    src/view/rankingresult.h \
+    src/util/analytichiearchyexcelsaver.h
 
 SOURCES += \
     src/model/abstractprioritizationmatrix.cpp \
@@ -52,7 +53,8 @@ SOURCES += \
     src/model/entringdatamodel.cpp \
     src/settingsdialog.cpp \
     src/criteriadirectiondeligate.cpp \
-    src/view/rankingresult.cpp
+    src/view/rankingresult.cpp \
+    src/util/analytichiearchyexcelsaver.cpp
 
 RC_ICONS = res/images/AnalyticHiearchyIcons.ico
 

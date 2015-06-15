@@ -1,5 +1,6 @@
 #include "analytichiearchymainwindow.h"
 #include "ui_analytichiearchymainwindow.h"
+#include "util/analytichiearchyexcelsaver.h"
 #include <QMessageBox>
 #include <QFile>
 
@@ -48,4 +49,11 @@ void AnalyticHiearchyMainWindow::about()
 void AnalyticHiearchyMainWindow::showSettings()
 {
     settings->open();
+}
+
+void AnalyticHiearchyMainWindow::exportsExcel()
+{
+    AnalyticHiearchyExcelSaver saver;
+    saver.setFileName("example.xlsx");
+    saver.write(model);
 }
