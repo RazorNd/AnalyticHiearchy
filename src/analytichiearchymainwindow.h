@@ -25,6 +25,7 @@ private slots:
     void help();
     void about();
     void showSettings();
+    void exportsExcel();
 
 private:
     Ui::AnalyticHiearchyMainWindow *ui;

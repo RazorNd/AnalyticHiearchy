@@ -1,7 +1,10 @@
 #include "analytichiearchymainwindow.h"
 #include "ui_analytichiearchymainwindow.h"
+#include "util/analytichiearchyexcelexporter.h"
 #include <QMessageBox>
 #include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
 
 AnalyticHiearchyMainWindow::AnalyticHiearchyMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -48,4 +51,12 @@ void AnalyticHiearchyMainWindow::about()
 void AnalyticHiearchyMainWindow::showSettings()
 {
     settings->open();
+}
+
+void AnalyticHiearchyMainWindow::exportsExcel()
+{
+    AnalyticHiearchyExcelExporter exporter;
+
+
+    exporter.exportModel(model);
 }
