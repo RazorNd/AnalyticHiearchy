@@ -19,8 +19,11 @@ ParamForm::~ParamForm()
 void ParamForm::setModel(AnalyticHiearchyModel *model)
 {
     ui->tableView->setModel(model->entringModel());
+    EntringDataModel::EntringDataSelectionModel *selectionModel =
+            new EntringDataModel::EntringDataSelectionModel(model->entringModel(), this);
+    ui->tableView->setSelectionModel(selectionModel);
     connect(ui->submitButton, SIGNAL(clicked()),
             model->entringModel(), SLOT(enterModel()));
     connect(ui->clearButton, SIGNAL(clicked()),
-            model->entringModel(), SLOT(clear()));
+            selectionModel, SLOT(deleteSelected()));
 }

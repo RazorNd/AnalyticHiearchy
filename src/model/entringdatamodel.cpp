@@ -6,6 +6,7 @@
 #include <QtAlgorithms>
 
 
+
 EntringDataModel::TypeCell EntringDataModel::getTypeCell(const QModelIndex &index) const
 {
     if(!index.isValid())
@@ -19,15 +20,19 @@ EntringDataModel::TypeCell EntringDataModel::getTypeCell(const QModelIndex &inde
 
 bool EntringDataModel::setCriteriaRating(int criteria, const QVariant &value)
 {
-    if(value.isNull())
+    if(!value.isValid())
     {
         _criteriaRating[criteria] = 0;
+        _criteriaRatingDefinded[criteria] = false;
         return true;
     }
     bool ok;
     int rating = value.toInt(&ok);
     if(ok)
+    {
         _criteriaRating[criteria] = rating;
+        _criteriaRatingDefinded[criteria] = true;
+    }
     return ok;
 }
 
@@ -41,25 +46,48 @@ bool EntringDataModel::setCriteriaDirection(int criteria, const QVariant &value)
 
 bool EntringDataModel::setAlternativesRating(int criteria, int alternative, const QVariant &value)
 {
-    if(value.isNull())
+    if(!value.isValid())
     {
         _alternativeRating[criteria][alternative] = 0;
+        _alternativeRatingDefined[criteria][alternative] = false;
         return true;
     }
     bool ok;
     double rating = value.toDouble(&ok);
     if(ok)
+    {
         _alternativeRating[criteria][alternative] = rating;
+        _alternativeRatingDefined[criteria][alternative] = true;
+    }
     return ok;
+}
+
+bool EntringDataModel::setCriteriaRating(const QModelIndex &index, const QVariant &value)
+{
+    return setCriteriaRating(index.column(), value);
+}
+
+bool EntringDataModel::setCriteriaDirection(const QModelIndex &index, const QVariant &value)
+{
+    return setCriteriaDirection(index.column(), value);
+}
+
+bool EntringDataModel::setAlternativesRating(const QModelIndex &index, const QVariant &value)
+{
+    return setAlternativesRating(index.column(), index.row() - 2, value);
 }
 
 void EntringDataModel::enterCriteria()
 {
+
+
     int size = _parent->criteriaCount();
     int max = 0;
     foreach (int val, _criteriaRating)
         if(val > max)
             max = val;
+    if(max == 0)
+        return;
 
     CriteriaMatrix *matrix = _parent->criteriaMatrix();
     for(int i = 0; i < size; i++)
@@ -69,7 +97,7 @@ void EntringDataModel::enterCriteria()
             if(_parent->maxRating() != max)
             {
                 double delta =
-                        (double)(_criteriaRating[i] - _criteriaRating[j])*_parent->maxRating() / max;
+                        (double)((long)_criteriaRating[i] - (long)_criteriaRating[j])*_parent->maxRating() / max;
                 int res = qRound(qAbs(delta) - 1);
                 matrix->setData(matrix->index(i, j), delta > 0 ? res : -res, Qt::EditRole);
             }
@@ -83,14 +111,9 @@ void EntringDataModel::enterCriteria()
 }
 
 void EntringDataModel::enterAlternatives()
-{
-    int size = _parent->alternativeCount();
-    QVector<double> nullVector(size, 0.0);
+{    
     for(int i = 0; i < _alternativeRating.size(); i++)
-    {
-        if(!qEqual(_alternativeRating[i].begin(),
-                   _alternativeRating[i].end(),
-                   nullVector.begin()))
+    {        
         {
             enterAlternative(i);
         }
@@ -111,6 +134,8 @@ void EntringDataModel::enterAlternative(int criteria)
         if(val < min)
             min = val;
     }
+    if(max == min)
+        return;
     for(int i = 0; i < size; i++)
     {
         for(int j = i + 1; j < size; j++)
@@ -129,7 +154,7 @@ void EntringDataModel::enterAlternative(int criteria)
 
 EntringDataModel::EntringDataModel(AnalyticHiearchyModel *parentModel):
     QAbstractTableModel(parentModel), _parent(parentModel)
-{
+{    
 }
 
 void EntringDataModel::setCriteriaCount(int count)
@@ -141,11 +166,14 @@ void EntringDataModel::setCriteriaCount(int count)
     {
         beginInsertColumns(QModelIndex(), size, count - 1);
         _criteriaRating.resize(count);
+        _criteriaRatingDefinded.resize(count);
         _criteriaDirectionOnMax.resize(count);
         _alternativeRating.resize(count);
+        _alternativeRatingDefined.resize(count);
         int alternativeCount = _parent->alternativeCount();
         for(int i = size; i < count; i++)
         {
+            _alternativeRating[i].resize(alternativeCount);
             _alternativeRating[i].resize(alternativeCount);
         }
         endInsertColumns();
@@ -153,8 +181,10 @@ void EntringDataModel::setCriteriaCount(int count)
     }
     beginRemoveColumns(QModelIndex(), count, size - 1);
     _criteriaRating.resize(count);
+    _criteriaRatingDefinded.resize(count);
     _criteriaDirectionOnMax.resize(count);
     _alternativeRating.resize(count);
+    _alternativeRatingDefined.resize(count);
     endRemoveColumns();
 }
 
@@ -174,6 +204,7 @@ void EntringDataModel::setAlternativesCount(int count)
     for(int i = 0; i < _alternativeRating.size(); i++)
     {
         _alternativeRating[i].resize(count);
+        _alternativeRatingDefined[i].resize(count);
     }
     if(count > size)
         endInsertRows();
@@ -185,11 +216,13 @@ void EntringDataModel::clear()
 {
     beginResetModel();
     _criteriaRating.fill(0);
+    _criteriaRatingDefinded.fill(false);
     _criteriaDirectionOnMax.fill(false);
-    for(QVector<QVector<double> >::iterator it = _alternativeRating.begin();
-        it != _alternativeRating.end(); it++)
-    {
-        it->fill(0.0);
+    int critetiaCount = _alternativeRating.size();
+    for(int i = 0; i < critetiaCount; i++)
+    {        
+        _alternativeRating[i].fill(0.0);
+        _alternativeRatingDefined[i].fill(false);
     }
     endResetModel();
 }
@@ -204,6 +237,42 @@ int EntringDataModel::columnCount(const QModelIndex &/*parent*/) const
     return _parent->criteriaCount();
 }
 
+QVariant EntringDataModel::alternativeRating(const QModelIndex &index, int role) const
+{
+
+    if(_alternativeRatingDefined.at(index.column()).at(index.row() - 2)
+            || role == Qt::EditRole)
+    {
+        return _alternativeRating.at(index.column()).at(index.row() - 2);
+    }
+    return QVariant();
+}
+
+QVariant EntringDataModel::criteriaRating(const QModelIndex& index, int role) const
+{
+    if(_criteriaRatingDefinded.at(index.column())
+            || role == Qt::EditRole)
+        return _criteriaRating.at(index.column());
+    return QVariant();
+}
+
+void EntringDataModel::clear(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return;
+    switch (getTypeCell(index)) {
+    case EntringDataModel::AlternativeRating:
+        setAlternativesRating(index, QVariant());
+        break;
+    case EntringDataModel::CriteriaRating:
+        setCriteriaRating(index, QVariant());
+        break;
+    default:
+        break;
+    }
+    emit dataChanged(index, index, QVector<int>() << Qt::EditRole);
+}
+
 QVariant EntringDataModel::data(const QModelIndex &index, int role) const
 {
     switch (role) {
@@ -215,9 +284,9 @@ QVariant EntringDataModel::data(const QModelIndex &index, int role) const
     case Qt::EditRole:
         switch(getTypeCell(index)){
         case EntringDataModel::AlternativeRating:
-            return _alternativeRating.at(index.column()).at(index.row() - 2);
+            return alternativeRating(index, role);
         case EntringDataModel::CriteriaRating:
-            return _criteriaRating.at(index.column());
+            return criteriaRating(index, role);
         case EntringDataModel::CriteriaDirection:
             return _criteriaDirectionOnMax.at(index.column());
         default:
@@ -232,15 +301,17 @@ QVariant EntringDataModel::data(const QModelIndex &index, int role) const
 bool EntringDataModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if(role != Qt::EditRole)
+    {
         return false;
+    }
 
     switch(getTypeCell(index)){
     case EntringDataModel::AlternativeRating:
-        return setAlternativesRating(index.column(), index.row() - 2, value);
+        return setAlternativesRating(index, value);
     case EntringDataModel::CriteriaRating:
-        return setCriteriaRating(index.column(), value);
+        return setCriteriaRating(index, value);
     case EntringDataModel::CriteriaDirection:
-        return setCriteriaDirection(index.column(), value);
+        return setCriteriaDirection(index, value);
     default:
         return false;
     }
@@ -296,4 +367,22 @@ void EntringDataModel::enterModel()
 {
     enterCriteria();
     enterAlternatives();
+}
+
+
+EntringDataModel::EntringDataSelectionModel::EntringDataSelectionModel(EntringDataModel *model, QObject *parent):
+    QItemSelectionModel(model, parent),
+    _model(model)
+{
+}
+
+void EntringDataModel::EntringDataSelectionModel::deleteSelected()
+{
+    QModelIndexList indexes = selectedIndexes();
+    if(!indexes.size())
+        return _model->clear();
+    foreach (const QModelIndex &index, indexes)
+    {
+        _model->clear(index);
+    }
 }
