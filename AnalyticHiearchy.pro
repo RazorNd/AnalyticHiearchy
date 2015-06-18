@@ -33,7 +33,7 @@ HEADERS += \
     src/settingsdialog.h \
     src/criteriadirectiondeligate.h \
     src/view/rankingresult.h \
-    src/util/analytichiearchyexcelsaver.h
+    src/util/analytichiearchyexcelexporter.h
 
 SOURCES += \
     src/model/abstractprioritizationmatrix.cpp \
@@ -54,7 +54,7 @@ SOURCES += \
     src/settingsdialog.cpp \
     src/criteriadirectiondeligate.cpp \
     src/view/rankingresult.cpp \
-    src/util/analytichiearchyexcelsaver.cpp
+    src/util/analytichiearchyexcelexporter.cpp
 
 RC_ICONS = res/images/AnalyticHiearchyIcons.ico
 
