@@ -174,7 +174,7 @@ void EntringDataModel::setCriteriaCount(int count)
         for(int i = size; i < count; i++)
         {
             _alternativeRating[i].resize(alternativeCount);
-            _alternativeRating[i].resize(alternativeCount);
+            _alternativeRatingDefined[i].resize(alternativeCount);
         }
         endInsertColumns();
         return;
