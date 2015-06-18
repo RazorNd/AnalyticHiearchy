@@ -3,6 +3,8 @@
 #include "util/analytichiearchyexcelsaver.h"
 #include <QMessageBox>
 #include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
 
 AnalyticHiearchyMainWindow::AnalyticHiearchyMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -54,6 +56,13 @@ void AnalyticHiearchyMainWindow::showSettings()
 void AnalyticHiearchyMainWindow::exportsExcel()
 {
     AnalyticHiearchyExcelSaver saver;
+
+    /*QString fileName = QFileDialog::getSaveFileName(this, "Экспорт в Excel",
+                                                    QString(),
+                                                    "Excel (*.xlsx)", 0,
+                                                    QFileDialog::DontConfirmOverwrite);
+    if(fileName.isEmpty())
+        return;*/
     saver.setFileName("example.xlsx");
     saver.write(model);
 }
