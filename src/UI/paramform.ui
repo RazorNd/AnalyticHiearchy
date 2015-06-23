@@ -12,6 +12,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="EntringCriteria" name="entringCriteria" native="true"/>
+   </item>
+   <item>
     <widget class="QTableView" name="tableView"/>
    </item>
    <item>
@@ -47,6 +50,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>EntringCriteria</class>
+   <extends>QWidget</extends>
+   <header>src/entringcriteria.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
