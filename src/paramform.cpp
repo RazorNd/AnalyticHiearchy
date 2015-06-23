@@ -9,6 +9,8 @@ ParamForm::ParamForm(QWidget *parent) :
 {
     ui->setupUi(this);    
     ui->tableView->setItemDelegateForRow(0, new CriteriaDirectionDeligate(this));
+    connect(ui->submitButton, SIGNAL(clicked()),
+            ui->entringCriteria, SLOT(enterCriteria()));
 }
 
 ParamForm::~ParamForm()
@@ -22,6 +24,7 @@ void ParamForm::setModel(AnalyticHiearchyModel *model)
     EntringDataModel::EntringDataSelectionModel *selectionModel =
             new EntringDataModel::EntringDataSelectionModel(model->entringModel(), this);
     ui->tableView->setSelectionModel(selectionModel);
+    ui->entringCriteria->setModel(model);
     connect(ui->submitButton, SIGNAL(clicked()),
             model->entringModel(), SLOT(enterModel()));
     connect(ui->clearButton, SIGNAL(clicked()),
