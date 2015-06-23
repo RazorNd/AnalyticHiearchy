@@ -132,9 +132,9 @@ void EntringDataModel::setAlternativesCount(int count)
     if((size = _alternativeRating[0].size()) == count)
         return;
     else if(count > size)
-        beginInsertRows(QModelIndex(), size + 2, count + 1);
+        beginInsertRows(QModelIndex(), size + 1, count);
     else
-        beginRemoveRows(QModelIndex(), count + 2, size + 1);
+        beginRemoveRows(QModelIndex(), count + 1, size);
 
 
     for(int i = 0; i < _alternativeRating.size(); i++)
