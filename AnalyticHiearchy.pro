@@ -8,7 +8,7 @@ QT       += core gui axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-VERSION = 0.9.6.0
+VERSION = 0.9.7.0
 QMAKE_TARGET_COMPANY = RazorNd ltd.
 QMAKE_TARGET_PRODUCT = Analytic Hiearchy
 
@@ -33,7 +33,8 @@ HEADERS += \
     src/settingsdialog.h \
     src/criteriadirectiondeligate.h \
     src/view/rankingresult.h \
-    src/util/analytichiearchyexcelexporter.h
+    src/util/analytichiearchyexcelexporter.h \
+    src/entringcriteria.h
 
 SOURCES += \
     src/model/abstractprioritizationmatrix.cpp \
@@ -54,7 +55,8 @@ SOURCES += \
     src/settingsdialog.cpp \
     src/criteriadirectiondeligate.cpp \
     src/view/rankingresult.cpp \
-    src/util/analytichiearchyexcelexporter.cpp
+    src/util/analytichiearchyexcelexporter.cpp \
+    src/entringcriteria.cpp
 
 RC_ICONS = res/images/AnalyticHiearchyIcons.ico
 

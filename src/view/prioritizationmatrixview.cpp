@@ -21,6 +21,7 @@ PrioritizationMatrixView::PrioritizationMatrixView(QString name, AnalyticHiearch
     delegate = new RatingEditDelegate(this);
     ui->view->setItemDelegate(delegate);
     _numberTab = parent->addTab(this, name);
+    connect(this, SIGNAL(nameChaned(int,QString)), parent, SLOT(onTabNameChanged(int,QString)));
 }
 
 PrioritizationMatrixView::PrioritizationMatrixView(int numberTab, QString name, AnalyticHiearchyView *parent):
@@ -30,6 +31,7 @@ PrioritizationMatrixView::PrioritizationMatrixView(int numberTab, QString name, 
     delegate = new RatingEditDelegate(this);
     ui->view->setItemDelegate(delegate);
     parent->insertTab(numberTab, this, name);
+    connect(this, SIGNAL(nameChaned(int,QString)), parent, SLOT(onTabNameChanged(int,QString)));
 }
 
 PrioritizationMatrixView::~PrioritizationMatrixView()
@@ -57,9 +59,9 @@ void PrioritizationMatrixView::setModel(AbstractPrioritizationMatrix *matrix)
 
 void PrioritizationMatrixView::setName(QString name)
 {
-    ui->name->setText(name);
+    ui->name->setText(QString("МПС (%1)").arg(name));
     if(_numberTab != -1)
-        emit nameChaned(_numberTab, name);
+        emit nameChaned(_numberTab, QString("МПС (%1)").arg(name));
 }
 
 AbstractPrioritizationMatrix *PrioritizationMatrixView::model() const

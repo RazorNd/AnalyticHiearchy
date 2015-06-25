@@ -3,6 +3,7 @@
 
 #include "model/analytichiearchymodel.h"
 #include "settingsdialog.h"
+#include "util/analytichiearchyexcelexporter.h"
 #include <QMainWindow>
 #include <QMessageBox>
 
@@ -17,6 +18,7 @@ class AnalyticHiearchyMainWindow : public QMainWindow
     QMessageBox *helpMessage;
     SettingsDialog *settings;
     QString aboutText;
+    AnalyticHiearchyExcelExporter exporter;
 public:
     explicit AnalyticHiearchyMainWindow(QWidget *parent = 0);
     ~AnalyticHiearchyMainWindow();
@@ -24,8 +26,7 @@ public:
 private slots:
     void help();
     void about();
-    void showSettings();
-    void exportsExcel();
+    void showSettings();    
 
 private:
     Ui::AnalyticHiearchyMainWindow *ui;

@@ -15,12 +15,10 @@ public:
 
 private:
 
-    enum TypeCell {AlternativeRating, CriteriaRating, CriteriaDirection, IncorrectCell};
+    enum TypeCell {CriteriaDirection = 0, AlternativeRating = 1, IncorrectCell = -1};
 
     AnalyticHiearchyModel * const _parent;
 
-    QVector<uint> _criteriaRating;
-    QBitArray _criteriaRatingDefinded;
     QBitArray _criteriaDirectionOnMax;
 
     QVector< QVector<double> > _alternativeRating;
@@ -28,18 +26,15 @@ private:
 
     TypeCell getTypeCell(const QModelIndex &index) const;
 
-    bool setCriteriaRating(int criteria, const QVariant &value);
+
     bool setCriteriaDirection(int criteria, const QVariant &value);
-    bool setAlternativesRating(int criteria, int alternative, const QVariant &value);
-    bool setCriteriaRating(const QModelIndex &index, const QVariant &value);
+    bool setAlternativesRating(int criteria, int alternative, const QVariant &value);    
     bool setCriteriaDirection(const QModelIndex &index, const QVariant &value);
     bool setAlternativesRating(const QModelIndex &index, const QVariant &value);
 
-    void enterCriteria();
     void enterAlternatives();
     void enterAlternative(int criteria);
-    QVariant alternativeRating(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    QVariant criteriaRating(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QVariant alternativeRating(const QModelIndex &index, int role = Qt::DisplayRole) const;    
 
 public:
     EntringDataModel(AnalyticHiearchyModel *parentModel);    

@@ -2,6 +2,7 @@
     <qresource prefix="/text">
         <file>text/help.html</file>
         <file>text/about.html</file>
+        <file>text/qt_ru.qm</file>
     </qresource>
     <qresource prefix="/img">
         <file>images/AnalyticHiearchyIcons.png</file>

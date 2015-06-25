@@ -33,9 +33,10 @@
     </property>
     <widget class="QMenu" name="menu_3">
      <property name="title">
-      <string>&amp;Экспорт</string>
+      <string>&amp;Отчет</string>
      </property>
-     <addaction name="saveExcel"/>
+     <addaction name="createFullReport"/>
+     <addaction name="createShortReport"/>
     </widget>
     <addaction name="settings"/>
     <addaction name="separator"/>
@@ -80,9 +81,14 @@
     <string>Настройки</string>
    </property>
   </action>
-  <action name="saveExcel">
+  <action name="createFullReport">
    <property name="text">
-    <string>Excel</string>
+    <string>Создать полный отчет</string>
+   </property>
+  </action>
+  <action name="createShortReport">
+   <property name="text">
+    <string>Создать короткий отчет</string>
    </property>
   </action>
  </widget>
@@ -162,27 +168,10 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>saveExcel</sender>
-   <signal>triggered()</signal>
-   <receiver>AnalyticHiearchyMainWindow</receiver>
-   <slot>exportsExcel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>349</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
   <slot>help()</slot>
   <slot>about()</slot>
   <slot>showSettings()</slot>
-  <slot>exportsExcel()</slot>
  </slots>
 </ui>

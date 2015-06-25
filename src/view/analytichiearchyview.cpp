@@ -18,9 +18,7 @@ void AnalyticHiearchyView::setModel(AnalyticHiearchyModel *model)
     update();
     setConnectParam();
     _resultView->setModel(resultMatrix);
-    _rank->setModel(model);
-    ///NOTE: проверка можно ли без этого обойтись
-    //connect(_resultView, SIGNAL(updateData()), resultMatrix, SLOT(updateDate()));
+    _rank->setModel(model);    
 }
 
 void AnalyticHiearchyView::onCriteriaChanged(CriteriaMatrix *matrix)
@@ -42,8 +40,7 @@ void AnalyticHiearchyView::onCriteriaCountChanged(int count)
         _alternativesViews.reserve(count);
         for(int i = _alternativesViews.size(); i < count; i++)
         {
-            PrioritizationMatrixView *view = new PrioritizationMatrixView(i + 2,QString() ,this);
-            connect(view, SIGNAL(nameChaned(int,QString)), SLOT(onTabNameChanged(int,QString)));
+            PrioritizationMatrixView *view = new PrioritizationMatrixView(i + 2,QString() ,this);            
             _alternativesViews.push_back(view);
         }
         return;
@@ -88,8 +85,9 @@ AnalyticHiearchyView::AnalyticHiearchyView(QWidget *parent):
 
     _criteriaView = new PrioritizationMatrixView("Критерии", this);
 
+
     _resultView = new ResultView(this);
-    addTab(_resultView, "Матрица глобальных приоритетов");
+    addTab(_resultView, "Глобальные приоритеты");
     _rank = new RankingResult(this);
     addTab(_rank, "Результат");
 }
