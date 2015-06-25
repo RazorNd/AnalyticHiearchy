@@ -209,7 +209,7 @@ void AbstractPrioritizationMatrix::recalculateHarmonization()
 
 void AbstractPrioritizationMatrix::emitHarmonization()
 {
-    if(_harmonization > 0)
+    if(_harmonization >= 0)
     {
         QString color;
         if(_harmonization < 0.1)

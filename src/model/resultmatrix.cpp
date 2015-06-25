@@ -50,6 +50,13 @@ double ResultMatrix::globalPriority(int alternative) const
     return result;
 }
 
+QString ResultMatrix::bestAlternative() const
+{
+    if(_parent && _bestGlobalPriority < _parent->alternativeCount())
+        return _parent->alternative(_bestGlobalPriority);
+    return QString();
+}
+
 QVariant ResultMatrix::globalPriorityData(const QModelIndex &index, int role) const
 {
     switch (role) {
