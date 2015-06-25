@@ -138,7 +138,9 @@ int EntringCriteria::criterionNumber(int pos)
 
 int EntringCriteria::rating(int first, int second, int maxLevel) const
 {
-    return (double)(second - first) * (_model->maxRating() - 1) / (maxLevel - 1);
+    if(maxLevel != 1)
+        return (double)(second - first) * (_model->maxRating() - 1) / (maxLevel - 1);
+    return 0;
 }
 
 int EntringCriteria::firstFreeIndex() const
