@@ -37,6 +37,8 @@ public:
 
     double globalPriority(int alternative) const;
 
+    QString bestAlternative() const;
+
     // QAbstractItemModel interface
 public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;

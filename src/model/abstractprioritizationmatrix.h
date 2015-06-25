@@ -55,8 +55,8 @@ public:
     double normalPriority(int at) const;
 
     // QAbstractItemModel interface
-    int rowCount(const QModelIndex &) const;
-    int columnCount(const QModelIndex &) const;
+    int rowCount(const QModelIndex & = QModelIndex()) const;
+    int columnCount(const QModelIndex & = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;    
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role);
