@@ -94,7 +94,7 @@ void EntringDataModel::enterAlternative(int criteria)
 
 EntringDataModel::EntringDataModel(AnalyticHiearchyModel *parentModel):
     QAbstractTableModel(parentModel), _parent(parentModel)
-{    
+{
 }
 
 void EntringDataModel::setCriteriaCount(int count)
@@ -111,6 +111,7 @@ void EntringDataModel::setCriteriaCount(int count)
         int alternativeCount = _parent->alternativeCount();
         for(int i = size; i < count; i++)
         {
+            _criteriaDirectionOnMax.setBit(i);
             _alternativeRating[i].resize(alternativeCount);
             _alternativeRatingDefined[i].resize(alternativeCount);
         }
@@ -151,7 +152,7 @@ void EntringDataModel::setAlternativesCount(int count)
 void EntringDataModel::clear()
 {
     beginResetModel();    
-    _criteriaDirectionOnMax.fill(false);
+    _criteriaDirectionOnMax.fill(true);
     int critetiaCount = _alternativeRating.size();
     for(int i = 0; i < critetiaCount; i++)
     {        
