@@ -17,7 +17,7 @@ class EntringCriteria : public QWidget
     int _criteriaCount;
     QVector<QComboBox *> _criterion;
     QVector<QComboBox *> _compare;
-    QHBoxLayout *_layout;
+    QHBoxLayout *_layout;    
 
     void increaseCriteriaCount(int lastCount, int newCount);
     void reduceCriteriaCount(int lastCount, int newCount);
@@ -27,6 +27,9 @@ class EntringCriteria : public QWidget
 
     int criterionNumber(int pos);
     int rating(int first, int second, int maxLevel) const;
+
+    int firstFreeIndex() const;
+    bool isCorrectlyField() const;
 public:
     EntringCriteria(QWidget *parent = 0);
 
@@ -34,6 +37,7 @@ public:
     void setModel(AnalyticHiearchyModel *model);
 private slots:
     void setCriteriaCount(int count);
+    void swapCriteria(int currentIndex);    
 public slots:
     void enterCriteria();
 };
