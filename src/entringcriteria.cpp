@@ -1,6 +1,6 @@
 #include "entringcriteria.h"
 #include "model/criteriamatrix.h"
-#include <QHash>
+#include <QBitArray>
 
 //NOTE: убрать дебаг
 #include <QDebug>
@@ -33,9 +33,25 @@ void EntringCriteria::setCriteriaCount(int count)
     _criteriaCount = count;
 }
 
+void EntringCriteria::swapCriteria(int currentIndex)
+{
+    QComboBox *senderCriterion = qobject_cast<QComboBox *>(sender());
+    foreach(QComboBox *criterion, _criterion)
+    {
+        if(criterion == senderCriterion)
+            continue;
+        if(criterion->currentIndex() == currentIndex)
+        {
+            criterion->setCurrentIndex(firstFreeIndex());
+            return;
+        }
+    }
+}
+
 void EntringCriteria::enterCriteria()
 {
-
+    if(!isCorrectlyField())
+        return;
     QVector<int> criteriaLevels(_criteriaCount);
     int currentLevel = 1;
     criteriaLevels[criterionNumber(0)] = currentLevel;
@@ -96,10 +112,12 @@ void EntringCriteria::reduceCriteriaCount(int lastCount, int newCount)
 QComboBox *EntringCriteria::createCriteriaComboBox()
 {
     QComboBox *criterion = new QComboBox(this);
-    _layout->addWidget(criterion);
-    //TODO: сменить модель
+    _layout->addWidget(criterion);    
     criterion->setModel(_model->criteriaModel());
-    criterion->setCurrentIndex(-1);
+    criterion->setCurrentIndex(-1);    
+
+    connect(criterion, SIGNAL(currentIndexChanged(int)), SLOT(swapCriteria(int)));
+
     return criterion;
 }
 
@@ -121,6 +139,35 @@ int EntringCriteria::criterionNumber(int pos)
 int EntringCriteria::rating(int first, int second, int maxLevel) const
 {
     return (double)(second - first) * (_model->maxRating() - 1) / (maxLevel - 1);
+}
+
+int EntringCriteria::firstFreeIndex() const
+{
+    QBitArray isFree(_criteriaCount, true);
+    for(int i = 0; i < _criteriaCount; i++)
+    {
+        int index = _criterion[i]->currentIndex();
+        if(index >= 0 && index < _criteriaCount)
+            isFree.clearBit(index);
+    }
+    for(int i = 0; i < _criteriaCount; i++)
+    {
+        if(isFree.at(i))
+            return i;
+    }
+    return -1;
+}
+
+bool EntringCriteria::isCorrectlyField() const
+{
+    QBitArray isField(_criteriaCount);
+    for(int i = 0; i < _criteriaCount; i++)
+    {
+        int index = _criterion[i]->currentIndex();
+        if(index >= 0 && index < _criteriaCount)
+            isField.setBit(index);
+    }
+    return isField == QBitArray(_criteriaCount, true);
 }
 
 EntringCriteria::EntringCriteria(QWidget *parent) : QWidget(parent), _criteriaCount(0)
