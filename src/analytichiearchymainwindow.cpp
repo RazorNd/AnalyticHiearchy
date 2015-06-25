@@ -14,10 +14,15 @@ AnalyticHiearchyMainWindow::AnalyticHiearchyMainWindow(QWidget *parent) :
     model = new AnalyticHiearchyModel(this);
     model->setCriteriaCount(2);
     model->setAlternativeCount(3);
+
     ui->view->setModel(model);
+    exporter.setModel(model);
 
     settings = new SettingsDialog(this);
     settings->setModel(model);
+
+    connect(ui->createFullReport, SIGNAL(triggered()), &exporter, SLOT(createFullReport()));
+    connect(ui->createShortReport, SIGNAL(triggered()), &exporter, SLOT(createShortReport()));
 
     QFile fileInfo(":/text/text/help.html");
 
@@ -51,12 +56,4 @@ void AnalyticHiearchyMainWindow::about()
 void AnalyticHiearchyMainWindow::showSettings()
 {
     settings->open();
-}
-
-void AnalyticHiearchyMainWindow::exportsExcel()
-{
-    AnalyticHiearchyExcelExporter exporter;
-
-
-    exporter.exportModel(model);
 }

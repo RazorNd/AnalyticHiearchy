@@ -29,7 +29,7 @@ class AnalyticHiearchyExcelExporter : public QObject
 
     AnalyticHiearchyModel *_model;
 
-    bool processingWorkbook(QAxObject *workbook);
+    bool processingWorkbook(QAxObject *workbook, bool full = true);
 
     bool savingParam(QAxObject *sheet);
 
@@ -57,8 +57,11 @@ public:
     AnalyticHiearchyModel *model() const;
     void setModel(AnalyticHiearchyModel *model);
 
-    bool exportModel(AnalyticHiearchyModel *model);
-    bool exportModel();
+    bool exportModel(bool full = true);
+
+public slots:
+    void createShortReport();
+    void createFullReport();
 };
 
 #endif // ANALYTICHIEARCHYEXCELEXPORTER_H

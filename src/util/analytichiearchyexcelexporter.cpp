@@ -5,28 +5,38 @@
 #include "../model/resultmatrix.h"
 #include <QDebug>
 
-bool AnalyticHiearchyExcelExporter::exportModel(AnalyticHiearchyModel *model)
-{
-    setModel(model);
-    return exportModel();
-}
-
-bool AnalyticHiearchyExcelExporter::exportModel()
+bool AnalyticHiearchyExcelExporter::exportModel(bool full)
 {    
     if(!_model)
         return false;
     QAxObject excelApp("Excel.Application");
-    int needsWorksheets = 4 + _model->criteriaCount();
+
+    int needsWorksheets;
+    if(full)
+        needsWorksheets = 4 + _model->criteriaCount();
+    else
+        needsWorksheets = 3;
+
     excelApp.setProperty("SheetsInNewWorkbook", needsWorksheets);
 
     QAxObject *workbook = excelApp.querySubObject("Workbooks")
             ->querySubObject("add()");
 
-    processingWorkbook(workbook);
+    processingWorkbook(workbook, full);
 
 
     excelApp.setProperty("Visible", true);
     return true;
+}
+
+void AnalyticHiearchyExcelExporter::createShortReport()
+{
+    exportModel(false);
+}
+
+void AnalyticHiearchyExcelExporter::createFullReport()
+{
+    exportModel();
 }
 
 AnalyticHiearchyModel *AnalyticHiearchyExcelExporter::model() const
@@ -52,7 +62,7 @@ QAxObject * AnalyticHiearchyExcelExporter::getSheet(QAxObject *workbook, int num
     return sheet;
 }
 
-bool AnalyticHiearchyExcelExporter::processingWorkbook(QAxObject *workbook)
+bool AnalyticHiearchyExcelExporter::processingWorkbook(QAxObject *workbook, bool full)
 {    
     if(!workbook)
         return false;
@@ -68,18 +78,21 @@ bool AnalyticHiearchyExcelExporter::processingWorkbook(QAxObject *workbook)
         //TODO: add error not saving Entring Model
         return false;        
     }
-    if(!savingCriteriaModel(getSheet(workbook, pageNumber++), callBack))
+    if(full)
     {
-        //TODO: add error not saving Criteria Model
-        return false;
-    }
-    int criteriaCount = _model->criteriaCount();
-    for(int i = 0; i < criteriaCount; i++)
-    {
-        if(!savingAlternativeModel(i, getSheet(workbook, pageNumber++), callBack))
+        if(!savingCriteriaModel(getSheet(workbook, pageNumber++), callBack))
         {
-            //TODO: add error not saving Alternative Model
+            //TODO: add error not saving Criteria Model
             return false;
+        }
+        int criteriaCount = _model->criteriaCount();
+        for(int i = 0; i < criteriaCount; i++)
+        {
+            if(!savingAlternativeModel(i, getSheet(workbook, pageNumber++), callBack))
+            {
+                //TODO: add error not saving Alternative Model
+                return false;
+            }
         }
     }
     if(!savingResultModel(getSheet(workbook, pageNumber++)))
